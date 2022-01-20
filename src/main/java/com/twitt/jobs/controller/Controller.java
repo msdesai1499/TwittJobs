@@ -8,13 +8,18 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.twitt.jobs.entities.Institute;
 import com.twitt.jobs.entities.UserRegistrationAndLogin;
+import com.twitt.jobs.services.InstituteService;
 import com.twitt.jobs.services.Services;
 
 @RestController
 public class Controller {
 	@Autowired
 	private Services service;
+	
+	@Autowired
+	private InstituteService instituteService;
 	
 	//register candidate
 	@PostMapping("/register/candidate")
@@ -35,4 +40,26 @@ public class Controller {
 	{
 		return this.service.loginUser(user);
 	}
+	
+	
+	//register Institute
+	@PostMapping("/register/institute")
+	public String registerInstitute(@RequestBody Institute institute) {
+		
+			return this.instituteService.registerInstitute(institute);
+	}
+	
+	@GetMapping("/institutes")
+	public List<Institute> getInstitutes()
+	{
+		return this.instituteService.getInstitutes();
+	}
+	
+	@GetMapping("/login/institute")
+	public String loginInstitute(@RequestBody Institute institute)
+	{
+		return this.instituteService.loginInstitute(institute);
+	}
+	
+	
 }
